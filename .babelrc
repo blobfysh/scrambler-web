@@ -1,0 +1,10 @@
+{
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-react"
+	],
+	"plugins": [
+		// this plugin depends on @babel/runtime, needed this for async/await code
+		"@babel/plugin-transform-runtime"
+	]
+}

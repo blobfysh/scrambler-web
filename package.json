@@ -1,0 +1,68 @@
+{
+  "name": "scrambler-react",
+  "version": "1.0.0",
+  "main": "dist/backend/server.js",
+  "author": "blobfysh",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn build:server && yarn build:frontend",
+    "build:backend": "tsc",
+    "build:frontend": "webpack --mode production --config webpack.prod.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/backend/server.js\" \"webpack serve --mode development --config webpack.dev.js --open\"",
+    "start": "node dist/backend/server.js",
+    "lint": "lint:backend && lint:frontend",
+    "lint:backend": "eslint src/backend/** --ext .ts",
+    "lint:frontend": "eslint src/frontend/** --ext .js,.jsx"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*"
+    ],
+    "watch": [
+      "src/backend"
+    ],
+    "ext": ".ts,.js",
+    "delay": "3500"
+  },
+  "browserslist": [
+	">0.2%",
+	"not dead",
+	"not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@babel/preset-react": "^7.12.13",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.11",
+    "@types/express-session": "^1.17.3",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.0",
+    "css-loader": "^5.1.3",
+    "eslint": "^7.22.0",
+    "html-webpack-plugin": "^5.3.1",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "typescript": "^4.2.3",
+    "webpack": "^5.26.3",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.13.10",
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "joi": "^17.4.0",
+    "mongoose": "^5.12.0"
+  }
+}

@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"outDir": "dist/backend",
+		"rootDir": "src/backend",
+		"strict": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src/backend/**/*"],
+	"exclude": ["src/backend/types/*.ts", "node_modules", ".vscode"]
+}
