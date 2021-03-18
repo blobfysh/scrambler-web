@@ -38,6 +38,9 @@ mongoose.connect(process.env.MONGO_URI as string, {
 	// set up routes
 	app.use('/', express.static(path.join(__dirname, '..', 'frontend')))
 	app.use('/api', routes.api)
+	app.get('/*', (req, res) => {
+		res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html'))
+	})
 
 	// start app
 	app.listen(PORT, () => {

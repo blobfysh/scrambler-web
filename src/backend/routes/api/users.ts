@@ -157,7 +157,7 @@ router.patch(
 	}
 )
 
-// used by admins to change role of user
+// used by admins to delete user
 router.delete(
 	'/:name',
 	checkIsAdmin,

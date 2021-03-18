@@ -1,9 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 
 // excuse the massive amount of comments, im just trying to remember what this config file is doing :<
 
 module.exports = {
+	// same as using webpack --mode development
+	mode: 'development',
 	// where webpack starts building bundle
 	entry: path.resolve(__dirname, 'src', 'frontend', 'index.jsx'),
 	module: {
@@ -20,8 +24,10 @@ module.exports = {
 			{
 				test: /\.(css|scss|sass)$/,
 				use: [
-					// idk style-loader was advised to use with css-loader
-					'style-loader',
+					// extracts css into separate files
+					MiniCssExtractPlugin.loader,
+					// style-loader not compatible with mini-css-extract
+					// 'style-loader',
 					// load the css
 					'css-loader',
 					// compile sass to css
@@ -37,7 +43,7 @@ module.exports = {
 		// [name] is replaced with entry name (main)
 		// [contenthash] is generated based on the files
 		// contents, which makes it good for cache busting
-		filename: '[name].[contenthash].bundle.js',
+		filename: 'js/[name].[contenthash].bundle.js',
 		// cleans the output directory before outputting files
 		clean: true
 	},
@@ -46,6 +52,22 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'src', 'frontend', 'public', 'index.html'),
 			filename: 'index.html'
+		}),
+		new MiniCssExtractPlugin({
+			filename: 'styles/[name].[contenthash].css'
+		}),
+
+		// using copy-webpack-plugin to copy files from /public, similar to how CRA works
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: 'src/frontend/public',
+					globOptions: {
+						// ignore index.html because html-webpack-plugin already handles that
+						ignore: ['**/index.html']
+					}
+				}
+			]
 		})
 	],
 
@@ -59,6 +81,9 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: path.resolve(__dirname, 'dist', 'frontend'),
+
+		// needed to fix client-side routing, since express server will try to handle requests
+		historyApiFallback: true,
 
 		// proxy api requests to backend server during development (since webpack-dev-server runs on different port)
 		proxy: {

@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react'
-import Lol from './Lol'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Test from './Test'
+import Register from './Register'
 import './app.scss'
 
 function App () {
-	useEffect(async () => {
-		const res = await fetch('/api/users/me')
-
-		console.log('hi')
-		console.log(await res.json())
-	}, [])
-
 	return (
-		<>
-			<div className='test'>Welcome to webpack 5 react 17 app!</div>
-			<Lol />
-		</>
+		<Router>
+			<Route exact path='/' component={Test} />
+			<Route exact path='/register' component={Register} />
+		</Router>
 	)
 }
 
