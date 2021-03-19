@@ -1,8 +1,14 @@
 import React from 'react'
+import SEO from './components/SEO'
 
-function Register ({ obj }) {
+function Register () {
 	return (
-		<div>hjahahah!</div>
+		<div>
+			<SEO
+				title='ahhhaha'
+			/>
+			<span>nice</span>
+		</div>
 	)
 }
 

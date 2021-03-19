@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Test ({ obj }) {
+function Test () {
 	return (
 		<Link to='/register'>
 			Head to register
