@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const dotenv = require('dotenv').config()
 const path = require('path')
 
 // excuse the massive amount of comments, im just trying to remember what this config file is doing :<
@@ -68,6 +70,14 @@ module.exports = {
 					}
 				}
 			]
+		}),
+
+		// allows use of environment variables on frontend so long as the variable is prefixed with PUBLIC_
+		new DefinePlugin({
+			"process.env": Object.keys(dotenv.parsed).filter(env => env.startsWith('PUBLIC_')).reduce((prev, curr) => ({
+				...prev,
+				[curr]: JSON.stringify(dotenv.parsed[curr])
+			}), {})
 		})
 	],
 

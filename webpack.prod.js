@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { DefinePlugin } = require('webpack')
+const dotenv = require('dotenv').config()
 const path = require('path')
 
 module.exports = {
@@ -46,6 +48,12 @@ module.exports = {
 					}
 				}
 			]
+		}),
+		new DefinePlugin({
+			"process.env": Object.keys(dotenv.parsed).filter(env => env.startsWith('PUBLIC_')).reduce((prev, curr) => ({
+				...prev,
+				[curr]: JSON.stringify(dotenv.parsed[curr])
+			}), {})
 		})
 	],
 	optimization: {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Register({ obj }) {
+function Register ({ obj }) {
 	return (
 		<div>hjahahah!</div>
 	)
