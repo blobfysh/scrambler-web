@@ -1,10 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import SEO from '../components/SEO'
+import Layout from '../components/Layout/Layout'
 
 function Home () {
 	return (
-		<SEO />
+		<>
+			<SEO />
+			<Layout>
+				<span>Hi</span>
+			</Layout>
+		</>
 	)
 }
 
