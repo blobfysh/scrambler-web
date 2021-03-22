@@ -10,11 +10,13 @@ import { Heading,
 	useDisclosure } from '@chakra-ui/react'
 import { HiMenu, HiOutlineX } from 'react-icons/hi'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import LoginModal from '../Login/LoginModal'
 import RegisterModal from '../Register/RegisterModal'
 
 function Links ({ loginOnOpen, registerOnOpen }) {
 	const location = useLocation()
+	const user = useSelector(state => state.auth)
 
 	return (
 		<>
@@ -29,8 +31,8 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 			</Link>
 			<HStack>
 				{
-					// dont render login button if already on login page
-					location.pathname !== '/login' &&
+					// dont render login button if already on login page or logged in
+					!user.name && location.pathname !== '/login' &&
 					<Button
 						onClick={loginOnOpen}
 						variant='outline'
@@ -43,8 +45,8 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 					</Button>
 				}
 				{
-					// dont render register button if already on register page
-					location.pathname !== '/register' &&
+					// dont render register button if already on register page or logged in
+					!user.name && location.pathname !== '/register' &&
 					<Button
 						onClick={registerOnOpen}
 						to='/register'

@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-import Home from './pages/index'
-import Register from './pages/register'
-import Login from './pages/login'
+// lazy loading pages for webpack code splitting
+const Home = lazy(() => import('./pages/index'))
+const Register = lazy(() => import('./pages/register'))
+const Login = lazy(() => import('./pages/login'))
+
+// TODO get to a point where I dont need scss and just use chakra-ui
 import './app.scss'
 
 function App () {
 	return (
 		<Router>
-			<Route exact path='/' component={Home} />
-			<Route exact path='/register' component={Register} />
-			<Route exact path='/login' component={Login} />
+			<Suspense fallback={<span>Loading...</span>}>
+				<Route exact path='/' component={Home} />
+				<Route exact path='/register' component={Register} />
+				<Route exact path='/login' component={Login} />
+			</Suspense>
 		</Router>
 	)
 }

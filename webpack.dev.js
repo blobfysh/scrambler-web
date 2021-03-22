@@ -39,6 +39,8 @@ module.exports = {
 		]
 	},
 
+	devtool: 'eval-cheap-source-map',
+
 	// where webpack will output javascript bundle
 	output: {
 		path: path.resolve(__dirname, 'dist', 'frontend'),
