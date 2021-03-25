@@ -1,23 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Header from './Header'
-import { Container } from '@chakra-ui/react'
+import Container from '../Container'
 
-function Layout ({ children }) {
+function Layout ({ children, centered }) {
 	return (
 		<>
 			<Header />
-			<Container
-				centerContent={true}
-			>
-				{children}
-			</Container>
+			{
+				centered ?
+					<Container>{children}</Container> :
+					children
+			}
 		</>
 	)
 }
 
 Layout.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.node,
+	centered: PropTypes.bool
 }
 
 export default Layout

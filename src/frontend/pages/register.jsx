@@ -15,7 +15,7 @@ function Register () {
 			<SEO
 				title='Register'
 			/>
-			<Layout>
+			<Layout centered>
 				<Box
 					w={{ base: 'full', sm: 'fit-content' }}
 				>

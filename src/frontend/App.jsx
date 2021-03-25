@@ -6,7 +6,6 @@ const Home = lazy(() => import('./pages/index'))
 const Register = lazy(() => import('./pages/register'))
 const Login = lazy(() => import('./pages/login'))
 
-// TODO get to a point where I dont need scss and just use chakra-ui
 import './app.scss'
 
 function App () {

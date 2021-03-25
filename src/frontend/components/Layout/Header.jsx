@@ -49,7 +49,6 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 					!user.name && location.pathname !== '/register' &&
 					<Button
 						onClick={registerOnOpen}
-						to='/register'
 						colorScheme='blue'
 					>
 						Register

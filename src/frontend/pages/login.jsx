@@ -15,7 +15,7 @@ function Login () {
 			<SEO
 				title='Login'
 			/>
-			<Layout>
+			<Layout centered>
 				<Box w={{ base: 'full', sm: 'fit-content' }}>
 					<Box my='4'>
 						<VStack textAlign='center'>
