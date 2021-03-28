@@ -11,7 +11,7 @@ function Home () {
 		<>
 			<SEO />
 			<Layout>
-				<VStack py='24' textAlign='center' spacing='10' bg='gray.700' color='gray.50'>
+				<VStack py='24' textAlign='center' spacing='10' bg='gray.700' textColor='gray.50'>
 					<Container>
 						<VStack spacing='10'>
 							<Heading color='white' fontSize={{ base: '3xl', sm: '3xl', md: '4xl', lg: '5xl' }}>User-submitted scramble words with hints and definitions</Heading>
@@ -36,6 +36,11 @@ function Home () {
 							size='lg'
 							as={Link}
 							to='/login'
+							_hover={{ bg: 'gray.600' }}
+							_active={{
+								bg: 'gray.600'
+							}}
+							textColor='gray.50'
 						>
 							API
 						</Button>
