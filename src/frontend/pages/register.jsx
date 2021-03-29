@@ -16,17 +16,15 @@ function Register () {
 				title='Register'
 			/>
 			<Layout centered>
-				<Box
-					w={{ base: 'full', sm: 'fit-content' }}
-				>
-					<Box my='4'>
+				<Box w={{ base: 'full', sm: 'fit-content' }}>
+					<Box my='4' textStyle='paragraph'>
 						<VStack textAlign='center'>
 							<Heading>Create an account</Heading>
 							<Text>Already have an account?{' '}
 								<Link
 									as={RouterLink}
 									to='/login'
-									color='blue.600'
+									color='blue.300'
 								>
 									Login
 								</Link>
@@ -39,6 +37,7 @@ function Register () {
 						borderColor='gray.300'
 						p='3'
 						rounded='lg'
+						bg='gray.50'
 					>
 						<RegisterForm />
 					</Box>

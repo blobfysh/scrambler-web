@@ -13,7 +13,24 @@ const theme = extendTheme({
 	styles: {
 		global: {
 			body: {
-				bg: 'gray.50'
+				bg: 'gray.700'
+			},
+			a: {
+				color: 'blue.300'
+			}
+		}
+	},
+	textStyles: {
+		paragraph: {
+			textColor: 'gray.50'
+		},
+		h1: {
+			textColor: 'white',
+			fontSize: {
+				base: '3xl',
+				sm: '3xl',
+				md: '4xl',
+				lg: '5xl'
 			}
 		}
 	}

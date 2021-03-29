@@ -17,14 +17,14 @@ function Login () {
 			/>
 			<Layout centered>
 				<Box w={{ base: 'full', sm: 'fit-content' }}>
-					<Box my='4'>
+					<Box my='4' textStyle='paragraph'>
 						<VStack textAlign='center'>
 							<Heading>Sign in</Heading>
 							<Text>No account?{' '}
 								<Link
 									as={RouterLink}
 									to='/register'
-									color='blue.600'
+									color='blue.300'
 								>
 									Register
 								</Link>
@@ -37,6 +37,7 @@ function Login () {
 						borderColor='gray.300'
 						p='3'
 						rounded='lg'
+						bg='gray.50'
 					>
 						<LoginForm />
 					</Box>

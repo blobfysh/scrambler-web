@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Container as ChakraContainer } from '@chakra-ui/react'
 
-function Container ({ children }) {
+function Container ({ children, centered }) {
 	return (
 		<ChakraContainer
 			maxW={{ base: 'full', sm: '2xl', md: '4xl' }}
-			centerContent={true}
+			centerContent={centered}
 		>
 			{children}
 		</ChakraContainer>
@@ -14,7 +14,12 @@ function Container ({ children }) {
 }
 
 Container.propTypes = {
-	children: PropTypes.node
+	children: PropTypes.node,
+	centered: PropTypes.bool
+}
+
+Container.defaultProps = {
+	centered: false
 }
 
 export default Container

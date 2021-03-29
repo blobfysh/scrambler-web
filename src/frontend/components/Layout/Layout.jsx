@@ -7,11 +7,7 @@ function Layout ({ children, centered }) {
 	return (
 		<>
 			<Header />
-			{
-				centered ?
-					<Container>{children}</Container> :
-					children
-			}
+			<Container centered={centered}>{children}</Container>
 		</>
 	)
 }

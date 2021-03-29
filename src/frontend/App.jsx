@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import PrivateRoute from './components/PrivateRoute'
 
 // lazy loading pages for webpack code splitting
 const Home = lazy(() => import('./pages/index'))
@@ -11,11 +12,13 @@ import './app.scss'
 function App () {
 	return (
 		<Router>
-			<Suspense fallback={<span>Loading...</span>}>
-				<Route exact path='/' component={Home} />
-				<Route exact path='/register' component={Register} />
-				<Route exact path='/login' component={Login} />
-			</Suspense>
+			<Switch>
+				<Suspense fallback={<span>Loading...</span>}>
+					<Route exact path='/' component={Home} />
+					<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/register' component={Register} />
+					<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/login' component={Login} />
+				</Suspense>
+			</Switch>
 		</Router>
 	)
 }

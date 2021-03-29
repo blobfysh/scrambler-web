@@ -13,6 +13,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import LoginModal from '../Login/LoginModal'
 import RegisterModal from '../Register/RegisterModal'
+import Container from '../Container'
 
 function Links ({ loginOnOpen, registerOnOpen }) {
 	const location = useLocation()
@@ -72,42 +73,44 @@ function Header () {
 				bg='gray.800'
 				textColor='white'
 			>
-				<Stack
-					direction='row'
-					alignItems='center'
-					justifyContent='space-between'
-					wrap='nowrap'
-					minH='3rem'
-				>
-					<Link
-						as={RouterLink}
-						to='/'
-						style={{
-							textDecoration: 'none'
-						}}
-					>
-						<Heading size='lg' textAlign='center'>Scrambled Words 😳</Heading>
-					</Link>
-					<IconButton
-						aria-label='Open Menu'
-						_hover={{ bg: 'gray.700' }}
-						_active={{
-							bg: 'gray.700'
-						}}
-						bg='transparent'
-						icon={menuOpen ? <HiOutlineX size='2em' /> : <HiMenu size='2em' />}
-						display={{ base: 'flex', md: 'none' }}
-						onClick={toggleMenu}
-					/>
+				<Container>
 					<Stack
-						direction={{ base: 'column', sm: 'row' }}
+						direction='row'
 						alignItems='center'
-						spacing={{ sm: '4', base: '2' }}
-						display={{ base: 'none', md: 'flex' }}
+						justifyContent='space-between'
+						wrap='nowrap'
+						minH='3rem'
 					>
-						<Links loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
+						<Link
+							as={RouterLink}
+							to='/'
+							style={{
+								textDecoration: 'none'
+							}}
+						>
+							<Heading size='lg' textAlign='center'>Scrambled Words 😳</Heading>
+						</Link>
+						<IconButton
+							aria-label='Open Menu'
+							_hover={{ bg: 'gray.700' }}
+							_active={{
+								bg: 'gray.700'
+							}}
+							bg='transparent'
+							icon={menuOpen ? <HiOutlineX size='2em' /> : <HiMenu size='2em' />}
+							display={{ base: 'flex', md: 'none' }}
+							onClick={toggleMenu}
+						/>
+						<Stack
+							direction={{ base: 'column', sm: 'row' }}
+							alignItems='center'
+							spacing={{ sm: '4', base: '2' }}
+							display={{ base: 'none', md: 'flex' }}
+						>
+							<Links loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
+						</Stack>
 					</Stack>
-				</Stack>
+				</Container>
 				{
 					menuOpen &&
 					<Stack
