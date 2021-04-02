@@ -13,7 +13,7 @@ function isAllowed (user, level) {
 		case 'noUser':
 			return !user.name
 		case 'mod':
-			return user.role === 'mod'
+			return ['mod', 'admin'].includes(user.role)
 		case 'admin':
 			return user.role === 'admin'
 		default:

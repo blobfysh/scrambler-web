@@ -10,13 +10,14 @@ import App from './App'
 store.dispatch(fetchLoggedIn)
 
 const theme = extendTheme({
+	config: {
+		initialColorMode: 'dark'
+	},
 	styles: {
 		global: {
 			body: {
-				bg: 'gray.700'
-			},
-			a: {
-				color: 'blue.300'
+				bg: 'gray.700',
+				color: 'gray.50'
 			}
 		}
 	},

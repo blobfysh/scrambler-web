@@ -12,7 +12,7 @@ function Home () {
 			<Layout>
 				<VStack py='24' textAlign='center' spacing='10' textStyle='paragraph'>
 					<VStack spacing='10'>
-						<Heading textStyle='h1'>User-submitted scramble words with hints and definitions</Heading>
+						<Heading textStyle='h1' as='h1'>User-submitted scramble words with hints and definitions</Heading>
 						<Text fontSize='xl'>
 							1,000 <chakra.span color='green.300'>approved</chakra.span> scramble words and 4,000 <chakra.span color='red.300'>unapproved</chakra.span>.
 						</Text>
@@ -23,7 +23,7 @@ function Home () {
 							size='lg'
 							rightIcon={<HiArrowRight />}
 							as={Link}
-							to='/login'
+							to='/submit'
 						>
 							Submit a word
 						</Button>

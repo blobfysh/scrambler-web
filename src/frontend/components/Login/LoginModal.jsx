@@ -25,7 +25,7 @@ function LoginModal ({ isOpen, onClose, openRegisterModal }) {
 							<Text>No account?{' '}
 								<Link
 									onClick={openRegisterModal}
-									color='blue.600'
+									color='blue.400'
 								>
 									Register
 								</Link>

@@ -10,6 +10,7 @@ const wordSchema = Joi.object({
 	word: Joi.string().min(4).max(30).regex(/^[A-Za-z]+$/).required()
 		.label('Word')
 		.messages({
+			'string.min': 'Word must be at least 4 characters long',
 			'string.pattern.base': 'Words only support alphanumeric characters'
 		}),
 	difficulty: Joi.string().valid('easy', 'medium', 'hard').required(),

@@ -107,7 +107,7 @@ function LoginForm () {
 									variant='ghost'
 									icon={passShowing ? <HiEyeOff size='1.4em' /> : <HiEye size='1.4em' />}
 									onClick={togglePassShow}
-									color='gray.800'
+									color='gray.50'
 								/>
 							</InputRightElement>
 						</InputGroup>

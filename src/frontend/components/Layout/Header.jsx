@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux'
 import LoginModal from '../Login/LoginModal'
 import RegisterModal from '../Register/RegisterModal'
 import Container from '../Container'
+import UserDropdown from '../UserDropdown'
 
 function Links ({ loginOnOpen, registerOnOpen }) {
 	const location = useLocation()
@@ -54,6 +55,10 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 					>
 						Register
 					</Button>
+				}
+				{
+					user.name &&
+					<UserDropdown user={user} />
 				}
 			</HStack>
 		</>

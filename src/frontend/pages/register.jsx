@@ -24,7 +24,7 @@ function Register () {
 								<Link
 									as={RouterLink}
 									to='/login'
-									color='blue.300'
+									color='blue.400'
 								>
 									Login
 								</Link>
@@ -34,10 +34,9 @@ function Register () {
 					<Box
 						boxShadow='md'
 						border='1px'
-						borderColor='gray.300'
+						borderColor='gray.600'
 						p='3'
 						rounded='lg'
-						bg='gray.50'
 					>
 						<RegisterForm />
 					</Box>
