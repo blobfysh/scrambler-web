@@ -18,7 +18,10 @@ function UserDropdown ({ user }) {
 			<MenuList>
 				<MenuGroup title={`Hello, ${user.name}`}>
 					<Link as={RouterLink} to='/submit' style={{ textDecoration: 'none' }}>
-						<MenuItem>Submit a word</MenuItem>
+						<MenuItem>Submit a new word</MenuItem>
+					</Link>
+					<Link as={RouterLink} to='/account/words' style={{ textDecoration: 'none' }}>
+						<MenuItem>Submitted words</MenuItem>
 					</Link>
 				</MenuGroup>
 				<MenuDivider />

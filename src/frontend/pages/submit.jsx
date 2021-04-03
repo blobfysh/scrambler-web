@@ -62,15 +62,6 @@ function Submit () {
 			if (res.status !== 200) {
 				const errors = await res.json()
 
-				console.log(errors)
-
-				for (const errKey in errors) {
-					formDispatch({
-						field: errKey,
-						value: ''
-					})
-				}
-
 				setErrors(errors)
 			}
 			else {
@@ -199,7 +190,7 @@ function Submit () {
 									delay: 0.5
 								}}
 							>
-								<Text textAlign='center'><Icon color='green' as={HiCheckCircle} w={6} h={6} /> Thank you for your submission! The mods will review it soon.</Text>
+								<Text textAlign='center'><Icon color='green.400' as={HiCheckCircle} w={6} h={6} /> Thank you for your submission! The mods will review it soon.</Text>
 							</MotionBox>
 					}
 				</MotionBox>
