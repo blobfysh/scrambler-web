@@ -1,6 +1,5 @@
 import React from 'react'
 import SEO from '../components/SEO'
-import Layout from '../components/Layout/Layout'
 import { Box,
 	Heading,
 	VStack,
@@ -15,7 +14,7 @@ function Login () {
 			<SEO
 				title='Login'
 			/>
-			<Layout centered>
+			<VStack>
 				<Box w={{ base: 'full', sm: 'fit-content' }}>
 					<Box my='4' textStyle='paragraph'>
 						<VStack textAlign='center'>
@@ -41,7 +40,7 @@ function Login () {
 						<LoginForm />
 					</Box>
 				</Box>
-			</Layout>
+			</VStack>
 		</>
 	)
 }

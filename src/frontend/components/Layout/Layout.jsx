@@ -3,18 +3,17 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import Container from '../Container'
 
-function Layout ({ children, centered }) {
+function Layout ({ children }) {
 	return (
 		<>
 			<Header />
-			<Container centered={centered}>{children}</Container>
+			<Container>{children}</Container>
 		</>
 	)
 }
 
 Layout.propTypes = {
-	children: PropTypes.node,
-	centered: PropTypes.bool
+	children: PropTypes.node
 }
 
 export default Layout

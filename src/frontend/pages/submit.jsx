@@ -1,6 +1,5 @@
 import React, { useReducer, useState } from 'react'
 import SEO from '../components/SEO'
-import Layout from '../components/Layout/Layout'
 import MotionBox from '../components/MotionBox'
 import { HiPlus, HiCheckCircle } from 'react-icons/hi'
 import { Box,
@@ -94,7 +93,7 @@ function Submit () {
 				title='Submit a word'
 				description='Submit a new scramble word.'
 			/>
-			<Layout centered>
+			<VStack>
 				<Box my='4' textStyle='paragraph'>
 					<VStack textAlign='center'>
 						<Heading>Submit a new scramble word</Heading>
@@ -204,7 +203,7 @@ function Submit () {
 							</MotionBox>
 					}
 				</MotionBox>
-			</Layout>
+			</VStack>
 		</>
 	)
 }
