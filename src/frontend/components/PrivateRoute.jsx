@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { Route, Redirect } from 'react-router-dom'
+import { Spinner } from '@chakra-ui/react'
 
 // possible levels are user (requires user to be logged in), noUser (requires user to be logged out),
 // mod (requires user role to be mod), and admin (requires user to be admin)
@@ -23,6 +24,12 @@ function isAllowed (user, level) {
 
 function PrivateRoute ({ level, noAuthRedirect, component: Component, ...rest }) {
 	const user = useSelector(state => state.auth)
+
+	if (user.status === 'loading') {
+		return (
+			<Spinner />
+		)
+	}
 
 	return (
 		<Route

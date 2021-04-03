@@ -55,7 +55,10 @@ module.exports = {
 		// copies index.html to output and automatically inserts the bundled javascript
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, 'src', 'frontend', 'public', 'index.html'),
-			filename: 'index.html'
+			filename: 'index.html',
+
+			// fixes injected js not being loaded when navigating to nested route
+			publicPath: '/'
 		}),
 		new MiniCssExtractPlugin({
 			filename: 'styles/[name].[contenthash].css'

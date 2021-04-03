@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 
-const siteTitle = 'Words Scrambled API'
+const siteTitle = 'Scrambled Words API'
 const siteDescription = 'User contributed scramble words.'
 
 function SEO ({ description, meta, title }) {

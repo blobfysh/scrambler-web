@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import User from '../../models/User'
+import Word from '../../models/Word'
 import Joi from 'joi'
 import validate from '../../middleware/validate'
-import { checkIsAdmin, checkLoggedOut } from '../../middleware/auth'
+import { checkIsAdmin, checkLoggedOut, checkLoggedIn } from '../../middleware/auth'
 
 const router = Router()
 
@@ -106,6 +107,26 @@ router.get('/me', async (req: Request, res: Response) => {
 		res.sendStatus(500)
 	}
 })
+
+// retrieves words logged in user created
+router.get(
+	'/me/words',
+	checkLoggedIn,
+	async (req: Request, res: Response) => {
+		try {
+			const { user } = req.session
+
+			const words = await Word.find({
+				// checkLoggedIn middleware makes sure user isnt null
+				createdBy: user!._id
+			})
+
+			res.status(200).json(words)
+		}
+		catch (err) {
+			res.sendStatus(500)
+		}
+	})
 
 router.get('/logout', (req: Request, res: Response) => {
 	req.session.destroy(() => {

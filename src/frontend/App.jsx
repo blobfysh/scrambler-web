@@ -9,6 +9,9 @@ const Login = lazy(() => import('./pages/login'))
 const Submit = lazy(() => import('./pages/submit'))
 const NotFound = lazy(() => import('./pages/404'))
 
+// account routes
+const Words = lazy(() => import('./pages/account/words'))
+
 import './app.scss'
 
 function App () {
@@ -20,6 +23,7 @@ function App () {
 					<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/register' component={Register} />
 					<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/login' component={Login} />
 					<PrivateRoute level='user' noAuthRedirect='/login' exact path='/submit' component={Submit} />
+					<PrivateRoute level='user' noAuthRedirect='/login' exact path='/account/words' component={Words} />
 					<Route path='*' component={NotFound} />
 				</Switch>
 			</Suspense>
