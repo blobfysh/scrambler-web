@@ -46,7 +46,7 @@ async function checkIsMod (req: Request, res: Response, next: NextFunction): Pro
 
 		const dbUser = await User.findById(user._id)
 
-		if (!dbUser || dbUser.role !== 'mod') {
+		if (!dbUser || !['mod', 'admin'].includes(dbUser.role)) {
 			res.sendStatus(401)
 		}
 		else {

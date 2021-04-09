@@ -24,12 +24,14 @@ function Words () {
 	const [words, setWords] = useState(null)
 
 	useEffect(() => {
+		let mounted = true
+
 		async function fetchData () {
 			try {
 				const data = await fetch('/api/users/me/words')
 				const result = await data.json()
 
-				setWords(result)
+				if (mounted) setWords(result)
 			}
 			catch (err) {
 				console.log(err)
@@ -37,6 +39,9 @@ function Words () {
 		}
 
 		fetchData()
+		return () => {
+			mounted = false
+		}
 	}, [])
 
 	return (

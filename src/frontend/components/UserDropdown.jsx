@@ -17,6 +17,12 @@ function UserDropdown ({ user }) {
 			</MenuButton>
 			<MenuList>
 				<MenuGroup title={`Hello, ${user.name}`}>
+					{
+						['mod', 'admin'].includes(user.role) &&
+						<Link as={RouterLink} to='/dashboard' style={{ textDecoration: 'none' }}>
+							<MenuItem color='blue.200'>Mod Dashboard</MenuItem>
+						</Link>
+					}
 					<Link as={RouterLink} to='/submit' style={{ textDecoration: 'none' }}>
 						<MenuItem>Submit a new word</MenuItem>
 					</Link>
@@ -26,7 +32,7 @@ function UserDropdown ({ user }) {
 				</MenuGroup>
 				<MenuDivider />
 				<Link href='/api/users/logout' style={{ textDecoration: 'none' }}>
-					<MenuItem>Sign out</MenuItem>
+					<MenuItem color='red.200'>Sign out</MenuItem>
 				</Link>
 			</MenuList>
 		</Menu>

@@ -126,7 +126,8 @@ router.get(
 		catch (err) {
 			res.sendStatus(500)
 		}
-	})
+	}
+)
 
 router.get('/logout', (req: Request, res: Response) => {
 	req.session.destroy(() => {

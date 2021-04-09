@@ -127,4 +127,24 @@ router.delete(
 	}
 )
 
+// retrieves unapproved words
+router.get(
+	'/unapproved',
+	checkIsMod,
+	async (req: Request, res: Response) => {
+		try {
+			const words = await Word
+				.find({ approved: false })
+				.sort('createdAt')
+				.populate('createdBy', 'name')
+				.select('word rhymesWith definition difficulty createdAt')
+				.limit(20)
+
+			res.status(200).json(words)
+		}
+		catch (err) {
+			res.sendStatus(500)
+		}
+	})
+
 export default router
