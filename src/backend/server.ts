@@ -20,12 +20,13 @@ mongoose.connect(process.env.MONGO_URI as string, {
 	useCreateIndex: true
 }).then(() => {
 	// set up middleware
+	app.set('trust proxy', 1)
 	app.use(express.urlencoded({ extended: false }))
 	app.use(express.json())
 	app.use(session({
 		name: 'scramblin',
 		secret: process.env.SESSION_SECRET as string,
-		resave: false,
+		resave: true,
 		saveUninitialized: false,
 		cookie: {
 			secure: process.env.NODE_ENV === 'production'
