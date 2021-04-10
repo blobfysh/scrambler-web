@@ -1,6 +1,6 @@
 {
-    "name": "Scrambled API",
-    "short_name": "Words Scrambled API",
+    "name": "Scrambled Words API",
+    "short_name": "Scrambled Words API",
     "icons": [
         {
             "src": "/android-chrome-96x96.png",
