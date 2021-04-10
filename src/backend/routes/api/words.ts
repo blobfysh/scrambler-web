@@ -19,7 +19,7 @@ const wordSchema = Joi.object({
 			'array.min': 'You must enter at least 2 words that rhyme',
 			'array.max': 'You can enter up to 3 words that rhyme'
 		}),
-	definition: Joi.string().max(60).required()
+	definition: Joi.string().max(150).required()
 		.messages({
 			'string.empty': 'You should enter a definition for this word'
 		})
@@ -41,7 +41,7 @@ router.post(
 			}
 
 			const newWord = new Word({
-				word: req.body.word,
+				word: `${req.body.word.charAt(0).toUpperCase()}${req.body.word.slice(1).toLowerCase()}`,
 				difficulty: req.body.difficulty,
 				rhymesWith: req.body.rhymesWith,
 				definition: req.body.definition,

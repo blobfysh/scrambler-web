@@ -16,12 +16,16 @@ const schema = new Schema({
 		required: true
 	},
 	rhymesWith: {
-		type: [String],
+		type: [{
+			type: String,
+			lowercase: true
+		}],
 		required: true
 	},
 	definition: {
 		type: String,
-		required: true
+		required: true,
+		lowercase: true
 	},
 	approved: {
 		type: Boolean,
