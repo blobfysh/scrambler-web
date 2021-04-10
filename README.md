@@ -13,6 +13,20 @@ Build both frontend and backend and watch files for changes:
 yarn dev
 ```
 
+## Building for production
+
+Build both frontend and backend to /dist:
+```
+yarn build
+```
+
+Start express server:
+```
+yarn start
+```
+
+## Todo list
+
 - [x] Express server with express-session middleware
 - [x] Connect to MongoDB
 - [x] Create routes (/api, /users) and import them in server.ts
