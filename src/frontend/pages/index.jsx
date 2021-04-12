@@ -68,7 +68,7 @@ function Home () {
 						variant='ghost'
 						size='lg'
 						as={Link}
-						to='/login'
+						to='/docs'
 						_hover={{ bg: 'gray.600' }}
 						_active={{
 							bg: 'gray.600'

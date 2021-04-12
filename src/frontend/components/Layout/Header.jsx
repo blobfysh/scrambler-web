@@ -24,7 +24,7 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 		<>
 			<Link
 				as={RouterLink}
-				to='/login'
+				to='/docs'
 				style={{
 					textDecoration: 'none'
 				}}

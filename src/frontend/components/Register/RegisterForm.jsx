@@ -7,7 +7,9 @@ import { Box,
 	Input,
 	Button,
 	FormErrorMessage,
-	InputGroup } from '@chakra-ui/react'
+	InputGroup,
+	Alert,
+	AlertIcon } from '@chakra-ui/react'
 import { useHistory } from 'react-router-dom'
 
 function RegisterForm ({ openLoginModal }) {
@@ -16,7 +18,7 @@ function RegisterForm ({ openLoginModal }) {
 		password: '',
 		passwordConfirmation: ''
 	})
-	const [errorState, setErrors] = useState({ name: '', password: '' })
+	const [errorState, setErrors] = useState({ name: '', password: '', message: '' })
 	const [isLoading, setLoading] = useState(false)
 	const history = useHistory()
 
@@ -81,6 +83,13 @@ function RegisterForm ({ openLoginModal }) {
 				onSubmit={handleSubmit}
 			>
 				<Stack spacing='6'>
+					{
+						!!errorState.message &&
+						<Alert status='error' rounded='md'>
+							<AlertIcon />
+							{errorState.message}
+						</Alert>
+					}
 					<FormControl id='name' isInvalid={!!errorState.name}>
 						<FormLabel>Username</FormLabel>
 						<Input

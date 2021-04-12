@@ -145,6 +145,7 @@ router.get(
 		catch (err) {
 			res.sendStatus(500)
 		}
-	})
+	}
+)
 
 export default router

@@ -10,6 +10,7 @@ const Login = lazy(() => import('./pages/login'))
 const Submit = lazy(() => import('./pages/submit'))
 const Dashboard = lazy(() => import('./pages/dashboard'))
 const NotFound = lazy(() => import('./pages/404'))
+const API = lazy(() => import('./pages/docs'))
 
 // account routes
 const Words = lazy(() => import('./pages/account/words'))
@@ -23,6 +24,7 @@ function App () {
 				<Suspense fallback={<span>Loading...</span>}>
 					<Switch>
 						<Route exact path='/' component={Home} />
+						<Route exact path='/docs' component={API} />
 						<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/register' component={Register} />
 						<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/login' component={Login} />
 						<PrivateRoute level='user' noAuthRedirect='/login' exact path='/submit' component={Submit} />

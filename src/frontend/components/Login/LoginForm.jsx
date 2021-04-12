@@ -9,7 +9,9 @@ import { Box,
 	FormErrorMessage,
 	IconButton,
 	InputRightElement,
-	InputGroup } from '@chakra-ui/react'
+	InputGroup,
+	Alert,
+	AlertIcon } from '@chakra-ui/react'
 
 function LoginForm () {
 	const [passShowing, togglePassShow] = useReducer(state => !state, false)
@@ -17,7 +19,7 @@ function LoginForm () {
 		name: '',
 		password: ''
 	})
-	const [errorState, setErrors] = useState({ name: '', password: '' })
+	const [errorState, setErrors] = useState({ name: '', password: '', message: '' })
 	const [isLoading, setLoading] = useState(false)
 
 	const handleInput = e => {
@@ -77,6 +79,13 @@ function LoginForm () {
 				onSubmit={handleSubmit}
 			>
 				<Stack spacing='6'>
+					{
+						!!errorState.message &&
+						<Alert status='error' rounded='md'>
+							<AlertIcon />
+							{errorState.message}
+						</Alert>
+					}
 					<FormControl id='name' isInvalid={!!errorState.name}>
 						<FormLabel>Username</FormLabel>
 						<Input

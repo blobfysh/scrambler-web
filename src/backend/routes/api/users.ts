@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express'
+import rateLimit from 'express-rate-limit'
 import bcrypt from 'bcryptjs'
 import User from '../../models/User'
 import Word from '../../models/Word'
@@ -8,6 +9,15 @@ import { checkIsAdmin, checkLoggedOut, checkLoggedIn } from '../../middleware/au
 
 const router = Router()
 
+// max 5 requests per 30 minutes
+const registerLimiter = rateLimit({
+	windowMs: 30 * 60 * 1000,
+	max: 5,
+	message: {
+		status: 429,
+		message: 'Too many accounts created...'
+	}
+})
 const registerSchema = Joi.object({
 	name: Joi.string().min(6).max(30).regex(/^[\w]+$/).required()
 		.label('Username')
@@ -22,6 +32,8 @@ router.post(
 	checkLoggedOut,
 	// use validation middleware to validate req.body against Joi schema
 	validate(registerSchema, 'body'),
+	// don't apply rate-limit unless body is validated
+	registerLimiter,
 	async (req: Request, res: Response) => {
 		try {
 			const user = await User.findOne({ name: req.body.name }, null, { collation: { locale: 'en', strength: 2 } })
@@ -51,6 +63,15 @@ router.post(
 	}
 )
 
+// max 10 requests per 5 minutes
+const loginLimiter = rateLimit({
+	windowMs: 5 * 60 * 1000,
+	max: 10,
+	message: {
+		status: 429,
+		message: 'Too many login attempts, try again later...'
+	}
+})
 const loginSchema = Joi.object({
 	name: Joi.string().required().label('Username'),
 	password: Joi.string().required().label('Password')
@@ -60,6 +81,7 @@ router.post(
 	'/login',
 	checkLoggedOut,
 	validate(loginSchema, 'body'),
+	loginLimiter,
 	async (req: Request, res: Response) => {
 		try {
 			// find user by username
