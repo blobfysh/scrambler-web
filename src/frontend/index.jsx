@@ -17,7 +17,11 @@ const theme = extendTheme({
 		global: {
 			body: {
 				bg: 'gray.700',
-				color: 'gray.50'
+				color: 'gray.50',
+				height: '100%'
+			},
+			html: {
+				height: '100%'
 			}
 		}
 	},
