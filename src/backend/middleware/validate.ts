@@ -13,7 +13,7 @@ export default (schema: Joi.Schema, type: 'body' | 'query' | 'params') => (req: 
 	})
 
 	if (!error) {
-		req.body = value
+		req[type] = value
 		next()
 	}
 	else {
