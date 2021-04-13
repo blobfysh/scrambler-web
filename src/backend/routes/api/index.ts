@@ -8,7 +8,7 @@ const router = Router()
 
 // max 300 requests per minute
 const randomLimiter = rateLimit({
-	windowMs: 30 * 60 * 1000,
+	windowMs: 60 * 1000,
 	max: 300,
 	message: {
 		status: 429,
