@@ -47,10 +47,12 @@ function RegisterForm ({ openLoginModal }) {
 				const errors = await res.json()
 
 				for (const errKey in errors) {
-					formDispatch({
-						field: errKey,
-						value: ''
-					})
+					if (errKey !== 'message') {
+						formDispatch({
+							field: errKey,
+							value: ''
+						})
+					}
 				}
 
 				setErrors(errors)
