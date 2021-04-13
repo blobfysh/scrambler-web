@@ -8,7 +8,7 @@ import { Heading,
 	VStack,
 	Spinner,
 	Center,
-	Flex } from '@chakra-ui/react'
+	SimpleGrid } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
 function WordBox ({ wordInfo }) {
@@ -48,15 +48,21 @@ function Words () {
 		<>
 			<SEO />
 			<VStack>
-				<Box w={{ base: 'full', sm: 'fit-content' }} my='4' textStyle='paragraph'>
-					<Heading textAlign='center'>Submitted Words</Heading>
+				<Box w={{ base: 'full', sm: 'fit-content' }} textAlign='center' my='4' textStyle='paragraph'>
+					<Heading>Submitted Words</Heading>
+					<Text>
+						{
+							words && !!words.length &&
+							`${words.length} total words`
+						}
+					</Text>
 				</Box>
 				{
 					words ?
 						words.length ?
-							<Flex direction='row' wrap='wrap' justify='center'>
+							<SimpleGrid columns={{ base: 1, sm: 2, md: 3 }}>
 								{words.map(wordInfo => <WordBox key={wordInfo.word} wordInfo={wordInfo} />)}
-							</Flex> :
+							</SimpleGrid> :
 							<Text>
 								You haven&apos;t submitted any words.{' '}
 								<Link
