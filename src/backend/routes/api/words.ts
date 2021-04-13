@@ -14,12 +14,13 @@ const wordSchema = Joi.object({
 			'string.pattern.base': 'Words only support alphanumeric characters'
 		}),
 	difficulty: Joi.string().valid('easy', 'medium', 'hard').required(),
-	rhymesWith: Joi.array().items(Joi.string().required()).min(2).max(3).required()
+	rhymesWith: Joi.array().items(Joi.string().trim().regex(/^[A-Za-z]+$/).required()).min(2).max(3).required()
 		.messages({
 			'array.min': 'You must enter at least 2 words that rhyme',
-			'array.max': 'You can enter up to 3 words that rhyme'
+			'array.max': 'You can enter up to 3 words that rhyme',
+			'string.pattern.base': 'Rhyming words can only contain alphanumeric characters (no spaces either)'
 		}),
-	definition: Joi.string().max(150).required()
+	definition: Joi.string().trim().max(150).required()
 		.messages({
 			'string.empty': 'You should enter a definition for this word'
 		})

@@ -22,7 +22,9 @@ const registerSchema = Joi.object({
 	name: Joi.string().min(6).max(30).regex(/^[\w]+$/).required()
 		.label('Username')
 		.messages({ 'string.pattern.base': 'Usernames only support alphanumeric characters and numbers' }),
-	password: Joi.string().required().min(6).max(30).label('Password'),
+	password: Joi.string().required().regex(/^[a-zA-Z0-9!@#$%^&*]+$/).min(6).max(30)
+		.label('Password')
+		.messages({ 'string.pattern.base': 'Passwords can only contain alphanumeric and special characters' }),
 	passwordConfirmation: Joi.string().equal(Joi.ref('password')).required().label('Confirm password')
 		.messages({ 'any.only': 'Passwords must match' })
 })
