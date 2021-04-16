@@ -22,6 +22,18 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 
 	return (
 		<>
+			{
+				user.name &&
+				<Link
+					as={RouterLink}
+					to='/browse'
+					style={{
+						textDecoration: 'none'
+					}}
+				>
+					Browse
+				</Link>
+			}
 			<Link
 				as={RouterLink}
 				to='/docs'

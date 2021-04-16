@@ -6,6 +6,52 @@ import Word from '../../models/Word'
 
 const router = Router()
 
+const browseQuerySchema = Joi.object({
+	page: Joi.number().label('Page'),
+	word: Joi.string().label('Word')
+})
+// used to browse words
+router.get(
+	'/',
+	checkLoggedIn,
+	validate(browseQuerySchema, 'query'),
+	async (req: Request, res: Response) => {
+		try {
+			const page = Math.max(0, parseInt(req.query.page as string ?? 1) - 1)
+			const limit = 10
+
+			if (req.query.word) {
+				const words = await Word
+					.find({ word: { $regex: req.query.word as string } })
+					.sort('createdAt')
+					.populate('createdBy', 'name')
+					.select('word difficulty createdAt')
+					.limit(limit)
+
+				console.log(words)
+
+				res.status(200).json(words)
+			}
+			else {
+				const words = await Word
+					.find()
+					.skip(page * limit)
+					.limit(limit)
+					.sort('createdAt')
+					.populate('createdBy', 'name')
+					.select('word difficulty createdAt')
+
+				console.log(words)
+
+				res.status(200).json(words)
+			}
+		}
+		catch (err) {
+			res.sendStatus(500)
+		}
+	}
+)
+
 const wordSchema = Joi.object({
 	word: Joi.string().min(4).max(30).regex(/^[A-Za-z]+$/).required()
 		.label('Word')

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import SEO from '../../components/SEO'
+import SEO from '../components/SEO'
 import { Heading,
 	Link,
 	Box,
@@ -9,7 +9,8 @@ import { Heading,
 	Spinner,
 	Center,
 	SimpleGrid } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
+import queryString from 'query-string'
 
 function WordBox ({ wordInfo }) {
 	return (
@@ -20,11 +21,13 @@ function WordBox ({ wordInfo }) {
 	)
 }
 
-function Words () {
+function Browse () {
 	const [words, setWords] = useState(null)
+	const location = useLocation()
 
 	useEffect(() => {
 		let mounted = true
+		console.log(queryString.parse(location.search))
 
 		async function fetchData () {
 			try {
@@ -42,7 +45,7 @@ function Words () {
 		return () => {
 			mounted = false
 		}
-	}, [])
+	}, [location.search])
 
 	return (
 		<>
@@ -101,4 +104,4 @@ WordBox.propTypes = {
 	wordInfo: PropTypes.object
 }
 
-export default Words
+export default Browse

@@ -40,3 +40,4 @@ yarn start
 - [x] Use webpack to allow use of any environment variables with PREFIX_ on the frontend
 - [x] Use chakra-ui to create frontend (since this project is mostly about full stack and idc about designing a frontend)
 - [x] Use redux to maintain user state across components
+- [ ] Use nprogress bar for suspense loading fallback
