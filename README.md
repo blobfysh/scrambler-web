@@ -35,9 +35,9 @@ yarn start
 - [x] Create a model for the scramble words (should contain word, hint, and 2 words that rhyme with it, also maybe the user who submitted it, and whether or not the word has been approved by mods)
 - [x] configure my own webpack settings for frontend
 - [ ] Use helmet for express? would be secure (can be done later)
-- [ ] Use cors middleware for express
+- [x] Use cors middleware for express
 - [x] Create frontend using webpack (in progress)
 - [x] Use webpack to allow use of any environment variables with PREFIX_ on the frontend
 - [x] Use chakra-ui to create frontend (since this project is mostly about full stack and idc about designing a frontend)
 - [x] Use redux to maintain user state across components
-- [ ] Use nprogress bar for suspense loading fallback
+- [x] ~~Use nprogress bar for suspense loading fallback~~ nprogress wasn't working so I used a react topbar instead
