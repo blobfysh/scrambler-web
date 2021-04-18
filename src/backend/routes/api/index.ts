@@ -3,6 +3,7 @@ import rateLimit from 'express-rate-limit'
 import usersRouter from './users'
 import wordsRouter from './words'
 import Word from '../../models/Word'
+import cors from 'cors'
 
 const router = Router()
 
@@ -17,7 +18,7 @@ const randomLimiter = rateLimit({
 })
 
 // could use swagger-ui-express to generate api docs
-router.get('/random', randomLimiter, async (req: Request, res: Response) => {
+router.get('/random', cors(), randomLimiter, async (req: Request, res: Response) => {
 	try {
 		const approvedCount = await Word.countDocuments({ approved: true })
 		const rand = Math.floor(Math.random() * approvedCount)
