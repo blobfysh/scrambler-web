@@ -36,9 +36,10 @@ function WordBox ({ wordInfo, index }) {
 
 	return (
 		<Fade in={fadedIn}>
-			<VStack bg='gray.800' rounded='xl' p='6'>
+			<VStack bg='gray.800' rounded='xl' p='6' spacing='0'>
 				<Heading as='h3'>{wordInfo.word}</Heading>
 				<Text>Created: {new Date(wordInfo.createdAt).toLocaleDateString()}</Text>
+				<Text>Created by: {wordInfo.createdBy.name}</Text>
 			</VStack>
 		</Fade>
 	)

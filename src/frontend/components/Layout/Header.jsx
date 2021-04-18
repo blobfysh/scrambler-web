@@ -16,24 +16,18 @@ import RegisterModal from '../Register/RegisterModal'
 import Container from '../Container'
 import UserDropdown from '../UserDropdown'
 
-function Links ({ loginOnOpen, registerOnOpen }) {
-	const location = useLocation()
-	const user = useSelector(state => state.auth)
-
+function NavLinks () {
 	return (
 		<>
-			{
-				user.name &&
-				<Link
-					as={RouterLink}
-					to='/browse'
-					style={{
-						textDecoration: 'none'
-					}}
-				>
-					Browse
-				</Link>
-			}
+			<Link
+				as={RouterLink}
+				to='/browse'
+				style={{
+					textDecoration: 'none'
+				}}
+			>
+				Browse
+			</Link>
 			<Link
 				as={RouterLink}
 				to='/docs'
@@ -43,37 +37,45 @@ function Links ({ loginOnOpen, registerOnOpen }) {
 			>
 				API
 			</Link>
-			<HStack>
-				{
-					// dont render login button if already on login page or logged in
-					!user.name && location.pathname !== '/login' &&
-					<Button
-						onClick={loginOnOpen}
-						variant='outline'
-						_hover={{ bg: 'gray.700' }}
-						_active={{
-							bg: 'gray.700'
-						}}
-					>
-						Login
-					</Button>
-				}
-				{
-					// dont render register button if already on register page or logged in
-					!user.name && location.pathname !== '/register' &&
-					<Button
-						onClick={registerOnOpen}
-						colorScheme='blue'
-					>
-						Register
-					</Button>
-				}
-				{
-					user.name &&
-					<UserDropdown user={user} />
-				}
-			</HStack>
 		</>
+	)
+}
+
+function UserLinks ({ loginOnOpen, registerOnOpen }) {
+	const location = useLocation()
+	const user = useSelector(state => state.auth)
+
+	return (
+		<HStack spacing='4'>
+			{
+				// dont render login button if already on login page or logged in
+				user.status !== 'loading' && !user.name && location.pathname !== '/login' &&
+				<Button
+					onClick={loginOnOpen}
+					variant='outline'
+					_hover={{ bg: 'gray.700' }}
+					_active={{
+						bg: 'gray.700'
+					}}
+				>
+					Login
+				</Button>
+			}
+			{
+				// dont render register button if already on register page or logged in
+				user.status !== 'loading' && !user.name && location.pathname !== '/register' &&
+				<Button
+					onClick={registerOnOpen}
+					colorScheme='blue'
+				>
+					Register
+				</Button>
+			}
+			{
+				user.status !== 'loading' && user.name &&
+				<UserDropdown user={user} />
+			}
+		</HStack>
 	)
 }
 
@@ -98,15 +100,20 @@ function Header () {
 						wrap='nowrap'
 						minH='3rem'
 					>
-						<Link
-							as={RouterLink}
-							to='/'
-							style={{
-								textDecoration: 'none'
-							}}
-						>
-							<Heading size='lg' textAlign='center'>Scrambled Words 😳</Heading>
-						</Link>
+						<HStack spacing='4'>
+							<Link
+								as={RouterLink}
+								to='/'
+								style={{
+									textDecoration: 'none'
+								}}
+							>
+								<Heading size='lg' textAlign='center'>Scrambled Words 😳</Heading>
+							</Link>
+							<HStack spacing='4' display={{ base: 'none', md: 'unset' }}>
+								<NavLinks />
+							</HStack>
+						</HStack>
 						<IconButton
 							aria-label='Open Menu'
 							_hover={{ bg: 'gray.700' }}
@@ -118,14 +125,11 @@ function Header () {
 							display={{ base: 'flex', md: 'none' }}
 							onClick={toggleMenu}
 						/>
-						<Stack
-							direction={{ base: 'column', sm: 'row' }}
-							alignItems='center'
-							spacing={{ sm: '4', base: '2' }}
+						<Box
 							display={{ base: 'none', md: 'flex' }}
 						>
-							<Links loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
-						</Stack>
+							<UserLinks loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
+						</Box>
 					</Stack>
 				</Container>
 				{
@@ -137,7 +141,8 @@ function Header () {
 						mt='4'
 						display={{ base: 'flex', md: 'none' }}
 					>
-						<Links loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
+						<NavLinks />
+						<UserLinks loginOnOpen={loginOnOpen} registerOnOpen={registerOnOpen} />
 					</Stack>
 				}
 			</Box>
@@ -153,7 +158,7 @@ function Header () {
 	)
 }
 
-Links.propTypes = {
+UserLinks.propTypes = {
 	loginOnOpen: PropTypes.func,
 	registerOnOpen: PropTypes.func
 }

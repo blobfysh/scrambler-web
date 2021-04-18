@@ -31,7 +31,6 @@ const browseQuerySchema = Joi.object({
 // used to browse words
 router.get(
 	'/',
-	checkLoggedIn,
 	validate(browseQuerySchema, 'query'),
 	browseLimiter,
 	async (req: Request, res: Response) => {

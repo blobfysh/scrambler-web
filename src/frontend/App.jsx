@@ -35,11 +35,11 @@ function App () {
 					<Switch>
 						<Route exact path='/' component={Home} />
 						<Route exact path='/docs' component={API} />
+						<Route exact path='/browse' component={Browse} />
 						<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/register' component={Register} />
 						<PrivateRoute level='noUser' noAuthRedirect='/' exact path='/login' component={Login} />
 						<PrivateRoute level='user' noAuthRedirect='/login' exact path='/submit' component={Submit} />
 						<PrivateRoute level='user' noAuthRedirect='/login' exact path='/account/words' component={Words} />
-						<PrivateRoute level='user' noAuthRedirect='/login' exact path='/browse' component={Browse} />
 						<PrivateRoute level='mod' noAuthRedirect='/login' exact path='/dashboard' component={Dashboard} />
 						<Route path='*' component={NotFound} />
 					</Switch>
