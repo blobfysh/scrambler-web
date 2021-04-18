@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import NProgress from 'nprogress'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import PrivateRoute from './components/PrivateRoute'
 import Layout from './components/Layout/Layout'
