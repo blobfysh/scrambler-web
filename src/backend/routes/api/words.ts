@@ -3,9 +3,27 @@ import Joi from 'joi'
 import validate from '../../middleware/validate'
 import { checkLoggedIn, checkIsMod } from '../../middleware/auth'
 import Word from '../../models/Word'
+import { Word as WordType } from '../../types/Word'
+import escapeStringRegexp from 'escape-string-regexp'
+import rateLimit from 'express-rate-limit'
 
 const router = Router()
 
+interface PaginatedResult {
+	next: boolean
+	previous: boolean
+	words: WordType[]
+}
+
+// max 60 requests per minute
+const browseLimiter = rateLimit({
+	windowMs: 60 * 1000,
+	max: 60,
+	message: {
+		status: 429,
+		message: 'Too many requests, please try again later.'
+	}
+})
 const browseQuerySchema = Joi.object({
 	page: Joi.number().label('Page'),
 	word: Joi.string().label('Word')
@@ -15,35 +33,62 @@ router.get(
 	'/',
 	checkLoggedIn,
 	validate(browseQuerySchema, 'query'),
+	browseLimiter,
 	async (req: Request, res: Response) => {
 		try {
 			const page = Math.max(0, parseInt(req.query.page as string ?? 1) - 1)
-			const limit = 10
+			// limit cannot be changed right now but can easily be changed in future
+			const limit = 12
+
+			// result.previous can be used by frontend to tell if user can go to previous page,
+			// same idea for result.next
+			const result: PaginatedResult = {
+				next: false,
+				previous: false,
+				words: []
+			}
+			if (page > 0) {
+				result.previous = true
+			}
 
 			if (req.query.word) {
-				const words = await Word
-					.find({ word: { $regex: req.query.word as string } })
-					.sort('createdAt')
-					.populate('createdBy', 'name')
-					.select('word difficulty createdAt')
-					.limit(limit)
+				// using regex to mimic sql LIKE query
+				const $regex = escapeStringRegexp(req.query.word as string)
 
-				console.log(words)
-
-				res.status(200).json(words)
-			}
-			else {
+				const wordsCount = await Word.countDocuments({ word: { $regex, $options: 'i' }, approved: true })
 				const words = await Word
-					.find()
+					.find({ word: { $regex, $options: 'i' }, approved: true })
 					.skip(page * limit)
 					.limit(limit)
 					.sort('createdAt')
 					.populate('createdBy', 'name')
 					.select('word difficulty createdAt')
 
-				console.log(words)
+				result.words = words
 
-				res.status(200).json(words)
+				if ((page + 1) * limit < wordsCount) {
+					result.next = true
+				}
+
+				res.status(200).json(result)
+			}
+			else {
+				const approvedCount = await Word.countDocuments({ approved: true })
+				const words = await Word
+					.find({ approved: true })
+					.skip(page * limit)
+					.limit(limit)
+					.sort('createdAt')
+					.populate('createdBy', 'name')
+					.select('word difficulty createdAt')
+
+				result.words = words
+
+				if ((page + 1) * limit < approvedCount) {
+					result.next = true
+				}
+
+				res.status(200).json(result)
 			}
 		}
 		catch (err) {

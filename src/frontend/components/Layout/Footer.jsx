@@ -8,7 +8,7 @@ function Footer () {
 			mt='auto'
 		>
 			<Flex
-				mt='6'
+				mt='4'
 				bg='gray.800'
 				p='3'
 				direction='column'
