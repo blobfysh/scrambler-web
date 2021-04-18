@@ -1,5 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import NProgress from 'nprogress'
+import TopBarProgress from 'react-topbar-progress-indicator'
 import PrivateRoute from './components/PrivateRoute'
 import Layout from './components/Layout/Layout'
 
@@ -19,11 +21,18 @@ const Words = lazy(() => import('./pages/account/words'))
 
 import './app.scss'
 
+TopBarProgress.config({
+	barColors: {
+		'0': '#90cdf4',
+		'1.0': '#90cdf4'
+	}
+})
+
 function App () {
 	return (
 		<Router>
 			<Layout>
-				<Suspense fallback={<span>Loading...</span>}>
+				<Suspense fallback={<TopBarProgress />}>
 					<Switch>
 						<Route exact path='/' component={Home} />
 						<Route exact path='/docs' component={API} />
