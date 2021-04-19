@@ -59,7 +59,7 @@ router.get(
 					.find({ word: { $regex, $options: 'i' }, approved: true })
 					.skip(page * limit)
 					.limit(limit)
-					.sort('createdAt')
+					.sort('-createdAt')
 					.populate('createdBy', 'name')
 					.select('word difficulty createdAt')
 
@@ -77,7 +77,7 @@ router.get(
 					.find({ approved: true })
 					.skip(page * limit)
 					.limit(limit)
-					.sort('createdAt')
+					.sort('-createdAt')
 					.populate('createdBy', 'name')
 					.select('word difficulty createdAt')
 

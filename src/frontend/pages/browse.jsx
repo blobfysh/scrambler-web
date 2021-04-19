@@ -173,7 +173,8 @@ function Browse () {
 			/>
 			<Box>
 				<Box textAlign='center' my='4' textStyle='paragraph'>
-					<Heading as='h1' mb='2'>Browse Words</Heading>
+					<Heading as='h1'>Browse Words</Heading>
+					<Text mb='2'>Sorted newest to oldest</Text>
 					<Box mx='auto' w={{ base: '100%', md: '33%' }}>
 						<SearchBarForm
 							onChange={handleInputChange}
